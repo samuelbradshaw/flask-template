@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{theme}}">
+  <head>
+    <meta charset="utf-8">
+    <title>{{page.title}}</title>
+    <meta name="description" content="{{page.description}}">
+
+    <link rel="stylesheet" type="text/css" href="/static/styles/base.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/styles.css">
+    <link rel="icon" type="image/png" href="/static/_well-known/favicon.png?v=1">
+    <link rel="apple-touch-icon" href="{{app_root}}/static/_well-known/apple-touch-icon.png?v=1">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+
+    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:description" content="{{page.description}}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{app_root}}{% block page_image %}/static/_well-known/apple-touch-icon.png?v=1{% endblock %}">
+    <meta property="og:site_name" content="{{site_name}}">
+    <meta property="og:url" content="{{page.request.url if page.request else ''}}">
+
+    <!-- ANALYTICS CODE HERE -->
+    
+    <!-- block page_specific_styles_scripts -->
+    {% block page_specific_styles_scripts %}{% endblock %}
+  </head>
+  <body>
+    <header id="global-header">
+      <section id="top-bar">
+        <nav aria-label="Site navigation">
+          <a href="/" id="logo">Sample Website</a>
+          <ul>
+            <li><a href="/section-1" class="{% if page.site_section == 'section-1' %}selected{% endif %}">Section 1</a>
+            <li><a href="/section-2" class="{% if page.site_section == 'section-2' %}selected{% endif %}">Section 2</a>
+          </ul>
+        </nav>
+      </section>
+      <section id="breadcrumbs-bar">
+        <nav aria-label="Breadcrumbs">
+          <ol>
+            {% for breadcrumb in page.breadcrumbs %}
+              <li><a href="{{breadcrumb.href}}">{{breadcrumb.title}}</a>
+            {% endfor %}
+            <li><a id="current-page" aria-current="page">{{page.breadcrumb_title}}</a>
+          </ol>
+          {% if page.siblings %}
+            <div id="sibling-links">
+              {% if page.siblings.previous and page.siblings.next %}
+                <a href="{{page.siblings.previous.url}}" title="{{page.siblings.previous.title}}">&lt; Previous</a> | <a href="{{page.siblings.next.url}}" title="{{page.siblings.next.title}}">Next &gt;</a>
+              {% elif page.siblings.previous %}
+                <a href="{{page.siblings.previous.url}}" title="{{page.siblings.previous.title}}">&lt; Previous</a>
+              {% elif page.siblings.next %}
+                <a href="{{page.siblings.next.url}}" title="{{page.siblings.next.title}}">Next &gt;</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </nav>
+      </section>
+    </header>
+    <div id="wrapper">
+      <main id="content-wrapper">
+    
+        <!-- block content -->
+        {% block content %}{% endblock %}
+    
+      </main>
+    </div>
+    <footer id="global-footer">
+    </footer>
+
+    <!-- block scripts_after -->
+    {% block scripts_after %}{% endblock %}
+    
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement":
+        [
+          {% for breadcrumb in page.breadcrumbs %}
+            {
+              "@type": "ListItem",
+              "position": {{loop.index}},
+              "item": { "@id": "{{app_root}}{{breadcrumb.href}}", "name": "{{breadcrumb.title}}" }
+            },
+          {% endfor %}
+          {
+            "@type": "ListItem",
+            "position": {{page.breadcrumbs|length+1}},
+            "item": { "@id": "{{page.request.url if page.request else ''}}", "name": "{{page.breadcrumb_title}}" }
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>

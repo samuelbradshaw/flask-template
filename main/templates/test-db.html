@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+
+{% block page_specific_styles_scripts %}
+{% endblock %}
+
+{% block content %}
+
+<section>
+
+  <h1>Test Database</h1>
+  
+  {% if database_name %}
+    <p>Success! You are connected to the database <b>{{database_name}}</b>.</p>
+  {% else %}
+    <p>Could not connect to database.</p>
+    <p>{{error_message}}</p>
+  {% endif %}
+  
+</aside>
+
+{% endblock %}
+
+{% block scripts_after %}
+{% endblock %}
