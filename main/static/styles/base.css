@@ -129,12 +129,12 @@ html {
   padding-right: env(safe-area-inset-right);
 }
 #breadcrumbs-bar nav {
-  padding: 0.7rem var(--wrapper-padding);
+  padding: 0.8rem var(--wrapper-padding) 0.7rem var(--wrapper-padding);
   white-space: nowrap;
 }
 #breadcrumbs-bar li + li::before { content: "/"; position: relative; left: -0.5rem; }
 #breadcrumbs-bar a { border-bottom: 1px solid var(--breadcrumbs-bar-bg); }
-#breadcrumbs-bar a#current-page { color: inherit; border: none; }
+#breadcrumbs-bar a#current-page { color: inherit; border-color: var(--breadcrumbs-bar-bg); }
 
 
 /* CONTENT */
