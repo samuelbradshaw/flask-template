@@ -1,5 +1,4 @@
 # Python standard libraries
-import os
 
 # Third-party libraries
 from flask import Flask, render_template, request, redirect, send_from_directory, abort
@@ -13,8 +12,8 @@ from main import app, config, db
 def inject_common_variables():
   site_name = config.SITE_NAME
   app_root = request.url_root.rstrip('/')
-  theme = request.args.get('theme', 'default')
-  return dict(site_name=site_name, app_root=app_root, theme=theme)
+  forced_theme = request.args.get('theme', 'default')
+  return dict(site_name=site_name, app_root=app_root, forced_theme=forced_theme)
 
 
 # ROUTES

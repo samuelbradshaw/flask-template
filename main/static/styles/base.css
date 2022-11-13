@@ -1,6 +1,6 @@
 /* CUSTOM PROPERTIES */
 
-:root, :root[data-theme="light"] {
+:root, [data-theme="light"] {
   /* Light colors */
   --gray-97: hsl(0, 0%, 97%);
   --gray-95: hsl(0, 0%, 95%);
@@ -10,6 +10,7 @@
   --gray-50: hsl(0, 0%, 50%);
   --gray-20: hsl(0, 0%, 20%);
   --top-bar-bg: hsl(180, 50%, 40%);
+  --top-bar-text-color: hsl(0, 0%, 100%);
   --breadcrumbs-bar-bg: hsl(180, 50%, 80%);
   --page-bg: hsl(0, 0%, 100%);
   --text-color: hsl(0, 0%, 0%);
@@ -26,13 +27,14 @@
   --gray-50: hsl(0, 0%, 60%);
   --gray-20: hsl(0, 0%, 90%);
   --top-bar-bg: hsl(180, 50%, 50%);
+  --top-bar-text-color: hsl(0, 0%, 17%);
   --breadcrumbs-bar-bg: hsl(180, 50%, 20%);
   --page-bg: hsl(0, 0%, 17%);
   --text-color: var(--gray-20);
   --accent-color: hsl(180, 50%, 40%);
   --selection-color: hsl(180, 50%, 80%);
 }}
-:root[data-theme="dark"] {
+[data-theme="dark"] {
   /* Dark colors */
   --gray-97: hsl(0, 0%, 20%);
   --gray-95: hsl(0, 0%, 25%);
@@ -42,6 +44,7 @@
   --gray-50: hsl(0, 0%, 60%);
   --gray-20: hsl(0, 0%, 90%);
   --top-bar-bg: hsl(180, 50%, 50%);
+  --top-bar-text-color: hsl(0, 0%, 17%);
   --breadcrumbs-bar-bg: hsl(180, 50%, 20%);
   --page-bg: hsl(0, 0%, 17%);
   --text-color: var(--gray-20);
@@ -65,14 +68,14 @@
 
 html, body {
   margin: 0; padding: 0;
-  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  background-color: var(--page-bg);
 }
 html {
   font: 87.5% 'Arial', sans-serif; /* 14px (87.5% of 16px default browser font size) */
-  line-height: 1.3em;
+  line-height: 1.3;
   color: var(--text-color);
-  background-color: var(--page-bg);
+  background-color: var(--gray-97);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -98,13 +101,18 @@ html {
   display: inline-block;
 }
 #global-header a:hover { border-color: currentColor; }
-#global-header a.selected { border-color: currentColor; font-weight: bold; }
+#global-header a.selected {
+  border-color: currentColor;
+  font-weight: bold;
+  stroke: currentColor;
+  stroke-width: 2%;
+}
 #global-header ul, #global-header ol {
   list-style: none;
   margin: 0; padding: 0;
 }
 #global-header li { display: inline-block; }
-#global-header li + li { margin-left: 1rem; }
+#global-header li + li { margin-left: 1.3rem; }
 
 #top-bar {
   background-color: var(--top-bar-bg);
@@ -115,7 +123,7 @@ html {
   padding: 1rem var(--wrapper-padding);
 }
 #top-bar a {
-  color: var(--page-bg);
+  color: var(--top-bar-text-color);
   border-bottom: 1px solid var(--top-bar-bg);
   margin-top: 0.8rem;
 }
@@ -127,12 +135,13 @@ html {
   background-color: var(--breadcrumbs-bar-bg);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+  overflow-x: scroll;
 }
 #breadcrumbs-bar nav {
   padding: 0.8rem var(--wrapper-padding) 0.7rem var(--wrapper-padding);
   white-space: nowrap;
 }
-#breadcrumbs-bar li + li::before { content: "/"; position: relative; left: -0.5rem; }
+#breadcrumbs-bar li + li::before { content: "/"; position: relative; left: -0.6rem; }
 #breadcrumbs-bar a { border-bottom: 1px solid var(--breadcrumbs-bar-bg); }
 #breadcrumbs-bar a#current-page { color: inherit; border-color: var(--breadcrumbs-bar-bg); }
 
@@ -152,14 +161,28 @@ html {
 }
 #content-wrapper {
   margin: 0; padding: 1rem var(--wrapper-padding) 2rem var(--wrapper-padding);
-  overflow: hidden;
   box-sizing: border-box;
-  min-height: 400px;
+  min-height: 70vh;
   border-radius: 0 0 1em 1em;
+}
+h1:not(:first-child),
+h2:not(:first-child),
+h3:not(:first-child),
+h4:not(:first-child),
+h5:not(:first-child) {
+  margin-top: 1.5em;
+  scroll-margin-top: 1.25em;
 }
 a { color: var(--accent-color); text-decoration: underline; cursor: pointer; }
 a:hover, a:active { color: var(--accent-color); }
 a:not([href]) { color: inherit; text-decoration: inherit; cursor: auto; }
+hr {
+  clear: both;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: var(--gray-90);
+  margin: 1.8em 0;
+}
 
 
 /* FOOTER */
@@ -167,6 +190,9 @@ a:not([href]) { color: inherit; text-decoration: inherit; cursor: auto; }
 #global-footer {
   font-size: 0.9em;
   text-align: center;
-  margin: 0.8rem auto 2.4rem auto;
+  border-top: 1px solid var(--gray-90);
+  margin: 0.8rem auto 0 auto;
+  padding: 1.5em 0 2.5em 0;
+  background-color: var(--gray-97);
 }
 #global-footer a { color: var(--text-color); }

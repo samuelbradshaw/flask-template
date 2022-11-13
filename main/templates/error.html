@@ -2,8 +2,8 @@
 
 {% block page_specific_styles_scripts %}
 <style>
-  .error-container {
-    max-width: 450px;
+  .centered-block {
+    max-width: 550px;
     text-align: center;
     margin: 0 auto;
   }
@@ -12,18 +12,18 @@
 
 {% block content %}
 
-<section class="error-container">
-  <h1>{{error.code}} ERROR</h1>
-  {% if error.code == 404 %}
-    <p>Page not found. Please check the URL<br >or use the links above.</p>
-    <p>Thank you!</p>
-  {% elif error.code == 500 %}
-    <p>There appears to be a problem with this page – hopefully just temporary. Send me an email with the URL of the page, and I’ll see if I can fix it.</p>
-    <p>Thank you!</p>
-  {% else %}
-    <p>{{error.name}}: {{error.description}}</p>
-  {% endif %}
-</section>
+  <div class="centered-block">
+    <h1>{{error.code}} ERROR</h1>
+    {% if error.code == 404 %}
+      <p>Page not found. Please check the URL<br >or use the links above.</p>
+      <p>Thank you!</p>
+    {% elif error.code == 500 %}
+      <p>There appears to be a problem with this page – hopefully just temporary. Send me an email with the URL of the page, and I’ll see if I can fix it.</p>
+      <p>Thank you!</p>
+    {% else %}
+      <p>{{error.name}}: {{error.description}}</p>
+    {% endif %}
+  </div>
 
 {% endblock %}
 

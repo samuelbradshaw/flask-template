@@ -4,9 +4,6 @@
 {% endblock %}
 
 {% block content %}
-
-<section>
-
   <h1>Test Database</h1>
   
   {% if database_name %}
@@ -15,9 +12,6 @@
     <p>Could not connect to database.</p>
     <p>{{error_message}}</p>
   {% endif %}
-  
-</aside>
-
 {% endblock %}
 
 {% block scripts_after %}
